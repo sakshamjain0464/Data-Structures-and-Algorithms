@@ -343,6 +343,44 @@ class List{
             }
         }
     }
+
+    void createLoop(int data, int pos){   //creating loop in linked list
+        if(start == nullptr){
+            cout<<"Empty List";
+        }
+        else{
+            node* n = new node;
+            n->data = data;
+            int curr = 1;
+            node *temp = start;
+            while(curr < pos-1){
+                temp = temp->next;
+                curr++;
+            }
+            n->next = temp;
+            last->next = n;
+            cout<<"Loop Created";
+        }
+    }
+
+    bool checkLoop(){   //Checking for loop
+        if(start == NULL || start->next != NULL){
+            return false;
+        }
+        else{
+            node* slow = start;
+            node* fast = start;
+            while(fast -> next != nullptr){
+                slow = slow->next;
+                fast = fast->next->next;
+
+                if(slow == fast){
+                    return 1;
+                }
+            }
+            return 0;
+        }
+    }
 };
 
 int main(){
@@ -357,8 +395,7 @@ int main(){
     l1.insertEnd(60);
     l1.insertEnd(70);
     l1.display();
-    l1.deleteDup();
-    l1.reverse();
-    l1.display();
+    l1.createLoop(90, 5);
+    cout<<l1.checkLoop();
     return 0;
 }
