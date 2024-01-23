@@ -1,22 +1,32 @@
-Node* reverseDLL(Node * head)
-    {
-        if(head == nullptr || head->next == nullptr){ //If list has only one element
-            return head;
+Node *sortedInsert(struct Node* head, int data) {
+        Node* newNode = new Node(data);
+        if(head == nullptr){
+            return newNode;
         }
         else{
-            Node* prev = nullptr;  //Initialize the pointers
-            Node* curr = head;
-            Node* next = nullptr;
-            
-            // Swapping the links
-            while(curr != nullptr){
-                next = curr->next;
-                curr->next = prev;
-                curr->prev = next;
-                prev = curr;
-                curr = next;
+            if(data < head->data){
+                newNode->next = head;
+                return newNode;
             }
             
-            return prev;  //Return head
+            Node* prev = head;
+            Node* curr = head->next;
+            
+            while(curr!=nullptr){
+                if(data < curr->data){
+                    prev->next = newNode;
+                    newNode->next = curr;
+                    return head;
+                }
+                
+                prev = curr;
+                curr = curr->next;
+            }
+            
+            if(prev->next == nullptr){
+                prev->next = newNode;
+            }
+            
+            return head;
         }
     }
