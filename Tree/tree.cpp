@@ -56,9 +56,47 @@ void levelOrder(Node* root){
     }
 }
 
+void inorder(Node* root){
+    if(root == nullptr){
+        return;
+    }
+
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);
+}
+
+void preorder(Node* root){
+    if(root == nullptr){
+        return;
+    }
+
+    cout<<root->data<<" ";
+
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(Node* root){
+    if(root == nullptr){
+        return;
+    }
+
+    postorder(root->right);
+    postorder(root->left);
+
+    cout<<root->data<<" ";
+}
+
 int main(){
     Node* root = buildTree();
     cout<<endl;
     levelOrder(root);
+    inorder(root);
+    cout<<endl;
+    preorder(root);
+    cout<<endl;
+    postorder(root);
+    cout<<endl;
     return 0;
 }
