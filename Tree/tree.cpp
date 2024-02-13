@@ -56,6 +56,27 @@ void levelOrder(Node* root){
     }
 }
 
+void levelOrder2(Node* root){
+    queue<Node*> q;
+
+    q.push(root);
+
+    while(!q.empty()){
+        int count = q.size();
+
+        for(int i=0; i<count; i++){
+            Node* curr = q.front();
+            q.pop();
+
+            cout<<curr->data<<" ";
+
+            if(curr->left) q.push(curr->left);
+            if(curr->right) q.push(curr->right);
+        }
+        cout<<endl;
+    }
+}
+
 void inorder(Node* root){
     if(root == nullptr){
         return;
@@ -91,7 +112,7 @@ void postorder(Node* root){
 int main(){
     Node* root = buildTree();
     cout<<endl;
-    levelOrder(root);
+    levelOrder2(root);
     inorder(root);
     cout<<endl;
     preorder(root);
